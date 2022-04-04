@@ -1,10 +1,10 @@
 pipeline {
     agent any
     stages {
-    stage('docker run') {
+    stage('maven install') {
       steps {
-        withDockerContainer(args: '--name nginx-container-create-by-jenkins -v /some/content:/usr/share/nginx/html:ro -dit nginx', image: 'nginx') {
-    // some block
+        withMaven(globalMavenSettingsConfig: 'null', jdk: 'null', maven: 'Maven3', mavenSettingsConfig: 'null') {
+          sh 'mvn clean install'
 }
       }
     }
